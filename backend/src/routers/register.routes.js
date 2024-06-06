@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router(); 
 
-const {register} = require('../components/registrar')
+const {register} = require('../controllers/registrar')
 
 router.post('/registro', register)
 
