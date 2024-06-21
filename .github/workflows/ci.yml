@@ -72,5 +72,72 @@ jobs:
         npm run dev &
 
 
+
+  test:
+    runs-on: ubuntu-latest
+
+    #Este servicio, es solo para los que lo tengan de forma local la db (si esta en la nube no es necesario)
+    services:
+      mysql:
+        image: mysql:latest     
+        ports: 
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping" 
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test_password
+    env:
+      DB_HOST: 127.0.0.1
+      DB_USER: test_user
+      DB_PASSWORD: test_password
+      DB_DATABASE: test_db
+
+    steps:
+    - name: Clonando el repositorio
+      uses: actions/checkout@v4
+
+    # Este paso es solo para los que tengan de forma local su dato
+    - name: Configuración de la base de datos (crear db y tablas)
+      env: 
+        DB_HOST: 127.0.0.1
+        DB_USER: test_user
+        DB_PASSWORD: test_password
+      run: |
+        mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS test_db;"
+        mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD test_db < backend/src/db/create_table.sql
+
+    - name: Intalar nodejs (Setup Node.js)
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Instalar dependecias del backend
+      run: |
+        cd backend
+        npm install
+
+    - name: Hacer Pruebas Unitarias
+      run: |
+        cd backend
+        npx jest --testPathPattern="registro.test.js"
+        npx jest --testPathPattern="login.test.js"
+
+    
+    # - name: Instalar dependecias del frontend
+    #   run: |
+    #     cd frontend
+    #     npm install
+
+    # - name: Levantar el frontend
+    #   run: |
+    #     cd frontend
+    #     npm run dev &
+
                           
       

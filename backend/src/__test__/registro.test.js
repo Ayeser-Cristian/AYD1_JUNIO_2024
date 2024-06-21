@@ -1,12 +1,12 @@
 const request = require('supertest');
-
+const connection = require('../db/conectiondb');
 const app = require('../app')
 
 describe('POST /Registro', () => {
     it('Debería devolver un mensaje exitoso y un estado 200', async () => {
 
         const nuevo = {
-            correo: "correo2@gmail.com",
+            correo: "correo@gmail.com",
             contrasenia: "123",
             nombre: "Luis",
             apellido: "Perez"
@@ -29,3 +29,10 @@ describe('POST /Registro', () => {
     })
 
 })
+
+
+afterAll(async () => {
+    
+    await connection.end();
+
+});

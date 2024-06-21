@@ -1,5 +1,5 @@
 const request = require('supertest');
-
+const connection = require('../db/conectiondb');
 const app = require('../app')
 
 describe('POST /Login', () => {
@@ -7,7 +7,7 @@ describe('POST /Login', () => {
 
         const response = await request(app)
             .post('/login')
-            .send({ correo: 'juan1@example.com', contrasenia: 'clave123' });
+            .send({ correo: 'correo@gmail.com', contrasenia: '123' });
 
         expect(response.body.message).toBe('Inicio de sesión exitoso');
 
@@ -20,9 +20,15 @@ describe('POST /Login', () => {
 
         const response = await request(app)
             .post('/login')
-            .send({ correo: 'juan1@example.com', contrasenia: 'clave1234' });
+            .send({ correo: 'juan@gmail.com', contrasenia: 'clave1234' });
 
         expect(response.body.message).toBe('Nombre de usuario o contrasena incorrectos');
         expect(response.status).toBe(401);
     })
 })
+
+afterAll(async () => {
+    
+    await connection.end();
+
+});
