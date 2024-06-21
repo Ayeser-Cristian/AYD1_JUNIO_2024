@@ -59,6 +59,17 @@ jobs:
       run: |
         cd backend/src
         node index.js &
+        sleep 10
+    
+    - name: Instalar dependecias del frontend
+      run: |
+        cd frontend
+        npm install
+
+    - name: Levantar el frontend
+      run: |
+        cd frontend
+        npm run dev &
 
 
                           
