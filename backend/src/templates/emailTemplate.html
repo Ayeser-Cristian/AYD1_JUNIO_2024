@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correo del Hospital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #007bff;
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #007bff;
+        }
+        .header img {
+            max-width: 100px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 10px 0 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            border-top: 1px solid #007bff;
+            margin-top: 20px;
+        }
+        .footer p {
+            font-size: 14px;
+            color: #777;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://cdn-icons-png.flaticon.com/512/6890/6890395.png" alt="Logo del Hospital">
+            <h1>Hospital MediCare</h1>
+        </div>
+        <div class="content">
+            <p>Estimado/a paciente,</p>
+            <p>{{mensaje}}</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 Hospital MediCare. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>
