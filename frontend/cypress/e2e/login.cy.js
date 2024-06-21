@@ -3,7 +3,7 @@ describe('Login Test', () => {
     cy.visit('http://localhost:5173/login')
 
     cy.wait(1000)
-    cy.get('#email').type("analisis@gmail.com")
+    cy.get('#email').type("correo@gmail.com")
     cy.wait(1000)
     cy.get('#password').type("123")
     cy.wait(1000)

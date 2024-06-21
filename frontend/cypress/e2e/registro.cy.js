@@ -7,7 +7,7 @@ describe('Registro Test', () => {
         cy.wait(1000);
         cy.get('[placeholder="Last Name"]').type("Analisis6")
         cy.wait(1000);
-        cy.get('[type="email"]').type("prueba6@gmail.com")
+        cy.get('[type="email"]').type("prueba@gmail.com")
         cy.wait(1000)
         cy.get('[type="password"]').type("123")
         cy.wait(1000)

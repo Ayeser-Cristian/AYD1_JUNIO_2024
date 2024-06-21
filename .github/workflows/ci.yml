@@ -75,7 +75,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
+    needs: compilacion
     #Este servicio, es solo para los que lo tengan de forma local la db (si esta en la nube no es necesario)
     services:
       mysql:
@@ -129,15 +129,27 @@ jobs:
         npx jest --testPathPattern="login.test.js"
 
     
-    # - name: Instalar dependecias del frontend
-    #   run: |
-    #     cd frontend
-    #     npm install
+    - name: Instalar dependecias del frontend
+      run: |
+        cd frontend
+        npm install
 
-    # - name: Levantar el frontend
-    #   run: |
-    #     cd frontend
-    #     npm run dev &
+    - name: Levantar el frontend
+      run: |
+        cd frontend
+        npm run dev &
+        sleep 10
+
+    - name: Levantar el backend
+      run: |
+        cd backend/src
+        node index.js &
+    
+    - name: Pruebas E2E
+      run: |
+        cd frontend
+        npx cypress run
+        
 
                           
       
