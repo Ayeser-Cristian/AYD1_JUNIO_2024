@@ -48,7 +48,17 @@ jobs:
     - name: Intalar nodejs (Setup Node.js)
       uses: actions/setup-node@v4
       with:
-        node-version: 18 
+        node-version: 18
+
+    - name: Instalar dependecias del backend
+      run: |
+        cd backend
+        npm install
+
+    - name: Levantar el backend
+      run: |
+        cd backend/src
+        node index.js &
 
 
                           
