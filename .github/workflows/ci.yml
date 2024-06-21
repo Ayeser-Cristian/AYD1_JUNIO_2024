@@ -30,5 +30,8 @@ jobs:
       DB_USER: test_user
       DB_PASSWORD: test_password
       DB_DATABASE: test_db
-                          
+
+    steps:
+    - name: Clonando el repositorio
+      uses: actions/checkout@v4                      
       
