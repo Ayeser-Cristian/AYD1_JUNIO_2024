@@ -9,8 +9,26 @@ jobs:
   compilacion:
     runs-on: ubuntu-latest
 
-    steps: 
-    - name: Mensaje De prueba
-      run: |
-        echo "Hola Prueba"
+    #Para los que lo tengan de forma local (si esta en la nube no es necesario)
+    services:
+      mysql:
+        image: mysql:latest     
+        ports: 
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping" 
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test_password
+    env:
+      DB_HOST: 127.0.0.1
+      DB_USER: test_user
+      DB_PASSWORD: test_password
+      DB_DATABASE: test_db
+                          
       
