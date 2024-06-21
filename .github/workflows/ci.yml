@@ -9,7 +9,7 @@ jobs:
   compilacion:
     runs-on: ubuntu-latest
 
-    #Para los que lo tengan de forma local (si esta en la nube no es necesario)
+    #Este servicio, es solo para los que lo tengan de forma local la db (si esta en la nube no es necesario)
     services:
       mysql:
         image: mysql:latest     
@@ -33,5 +33,23 @@ jobs:
 
     steps:
     - name: Clonando el repositorio
-      uses: actions/checkout@v4                      
+      uses: actions/checkout@v4
+
+    # Este paso es solo para los que tengan de forma local su dato
+    - name: Configuración de la base de datos (crear db y tablas)
+      env: 
+        DB_HOST: 127.0.0.1
+        DB_USER: test_user
+        DB_PASSWORD: test_password
+      run: |
+        mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD -e "CREATE DATABASE IF NOT EXISTS test_db;"
+        mysql -h $DB_HOST -u $DB_USER -p$DB_PASSWORD test_db < backend/src/db/create_table.sql
+
+    - name: Intalar nodejs (Setup Node.js)
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18 
+
+
+                          
       

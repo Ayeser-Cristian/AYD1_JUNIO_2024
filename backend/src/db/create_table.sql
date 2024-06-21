@@ -1,0 +1,9 @@
+USE test_db;
+
+CREATE TABLE IF NOT EXISTS Usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    correo VARCHAR(255) NOT NULL,
+    contrasenia VARCHAR(255) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL
+);
